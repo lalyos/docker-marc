@@ -23,3 +23,15 @@ docker run -d \
 ```
 docker exec -it mydb psql -U postgres -c 'select * from vip'
 ```
+
+
+init
+
+```
+docker run -d \
+  --name mydb \
+  -e POSTGRES_PASSWORD=secret  \
+  -v vipdb:/var/lib/postgresql/data \
+  -v $PWD/sql:/docker-entrypoint-initdb.d \
+  postgres
+```
