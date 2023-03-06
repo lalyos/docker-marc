@@ -1,0 +1,9 @@
+version: '3.9'
+services:
+  web:
+    ports:
+    - 80
+    environment:
+    - TITLE=Vacsora mindenk9ne
+    - COLOR=magenta
+    image: web:v7
