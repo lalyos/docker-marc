@@ -9,7 +9,7 @@ cat > /var/www/html/index.html <<EOF
 </head>
 <body bgcolor="${COLOR:-gray}">
   <h1>${TITLE:-Welcome}</h1>
-    
+  ${BODY:-please use BODY/TITLE/COLOR wenv vars}
 </body>
 </html>
 EOF
