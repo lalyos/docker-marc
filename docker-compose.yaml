@@ -7,3 +7,15 @@ services:
     - TITLE=Vacsora mindenk9ne
     - COLOR=magenta
     image: web:v7
+    build: .
+
+  mydb:
+    image: postgres
+    environment:
+    - POSTGRES_PASSWORD=secret
+    volumes:
+    - ./sql:/docker-entrypoint-initdb.d
+    - vipdb:/var/lib/postgresql/data
+
+volumes:
+  vipdb:
