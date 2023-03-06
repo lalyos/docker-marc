@@ -16,6 +16,12 @@ services:
     volumes:
     - ./sql:/docker-entrypoint-initdb.d
     - vipdb:/var/lib/postgresql/data
+    
+  adminer:
+    image: adminer
+    restart: always
+    ports:
+      - 8080
 
 volumes:
   vipdb:
