@@ -1,19 +1,31 @@
 version: '3.9'
 services:
-  proxy:
-    image: nginxproxy/nginx-proxy
+
+  traefik:
+    image: traefik:1.7-alpine
+    command:
+      - --retry
+      - --rest
+      - --docker.domain=lvh.me
+      - --docker.network=docker-marc_default
+      - --api.dashboard
+    labels:
+      - "traefik.frontend.rule=Host:traefik.lvh.me"
+      - "traefik.port=8080"
     ports:
       - 80:80
     volumes:
-      - /var/run/docker.sock:/tmp/docker.sock
-  
+      - /var/run/docker.sock:/var/run/docker.sock
+
   web:
     ports:
     - 80
     environment:
-    - VIRTUAL_HOST=ebed.lvh.me
     - TITLE=Lalyos ebedelhet
     - COLOR=hotpink
+    - BODY=<iframe src="https://giphy.com/embed/pVBwnPDeIpd3wToeQ2" width="480" height="333" frameBorder="0" class="giphy-embed" allowFullScreen></iframe><p><a href="https://giphy.com/gifs/garfield-cat-food-pVBwnPDeIpd3wToeQ2">via GIPHY</a></p>
+    labels:
+      - traefik.frontend.auth.basic=admin:$$1$$I5Kt8BwT$$G4y6mBV3xVzyZKUECxqV61
     image: web:alpine
     # build: .
 
@@ -24,14 +36,10 @@ services:
     volumes:
     - ./sql:/docker-entrypoint-initdb.d
     - vipdb:/var/lib/postgresql/data
-    
   adminer:
-    environment:
-      - VIRTUAL_HOST=adminer.lvh.me
     image: adminer
     restart: always
     ports:
       - 8080
-
 volumes:
   vipdb:
