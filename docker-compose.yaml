@@ -1,12 +1,19 @@
 version: '3.9'
 services:
+  proxy:
+    image: nginxproxy/nginx-proxy
+    ports:
+      - 80:80
+    volumes:
+      - /var/run/docker.sock:/tmp/docker.sock
+  
   web:
     ports:
     - 80
     environment:
-    - TITLE=Kedd mingyart kave szunte ....
-    - COLOR=tan
-    - BODY=<iframe src="https://giphy.com/embed/pzryvxGeykOxeC0fWb" width="480" height="400" frameBorder="0" class="giphy-embed" allowFullScreen></iframe><p><a href="https://giphy.com/gifs/garfield-cat-coffee-pzryvxGeykOxeC0fWb">via GIPHY</a></p>
+    - VIRTUAL_HOST=ebed.lvh.me
+    - TITLE=Lalyos ebedelhet
+    - COLOR=hotpink
     image: web:alpine
     # build: .
 
@@ -19,6 +26,8 @@ services:
     - vipdb:/var/lib/postgresql/data
     
   adminer:
+    environment:
+      - VIRTUAL_HOST=adminer.lvh.me
     image: adminer
     restart: always
     ports:
