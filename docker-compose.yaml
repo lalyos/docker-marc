@@ -12,6 +12,16 @@ services:
     image: web:alpine
     # build: .
 
+  only:
+    profiles:
+      - only
+    ports:
+    - 80
+    environment:
+    - TITLE=ONLY-DEV
+    - COLOR=red
+    image: web:alpine
+
   mydb:
     image: postgres
     environment:

@@ -35,3 +35,39 @@ docker run -d \
   -v $PWD/sql:/docker-entrypoint-initdb.d \
   postgres
 ```
+
+cleanup:
+```
+docker rm -f mydb
+docker volume rm vipdb
+```
+
+## Networks
+
+```
+docker network create lufi
+```
+
+create dinner
+```
+docker run -dP \
+  --net lufi  \
+  --name vacsora  \
+  -v  $PWD/dinner.html:/var/www/html/index.html  \
+    web:v6 \
+      nginx -g "daemon off;"
+```
+
+```
+docker run -it --rm \
+  --net lufi \
+  busybox
+```
+
+## dev/qa/prod envs
+
+```
+docker compose up -d
+docker compose --env-file  .env.qa up -d
+docker compose --env-file  .env.prod up -d
+```
