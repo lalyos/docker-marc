@@ -4,10 +4,11 @@ services:
     ports:
     - 80
     environment:
-    - TITLE=Vacsora mindenk9ne
-    - COLOR=magenta
-    image: web:v7
-    build: .
+    - TITLE=Kedd mingyart kave szunte ....
+    - COLOR=tan
+    - BODY=<iframe src="https://giphy.com/embed/pzryvxGeykOxeC0fWb" width="480" height="400" frameBorder="0" class="giphy-embed" allowFullScreen></iframe><p><a href="https://giphy.com/gifs/garfield-cat-coffee-pzryvxGeykOxeC0fWb">via GIPHY</a></p>
+    image: web:alpine
+    # build: .
 
   mydb:
     image: postgres

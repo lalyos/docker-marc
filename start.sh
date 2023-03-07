@@ -1,7 +1,7 @@
 #!/bin/bash
 
 
-cat > /var/www/html/index.html <<EOF
+cat >${WWW_DIR:-/var/www/html}/index.html <<EOF
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -10,8 +10,9 @@ cat > /var/www/html/index.html <<EOF
 <body bgcolor="${COLOR:-gray}">
   <h1>${TITLE:-Welcome}</h1>
   ${BODY:-please use BODY/TITLE/COLOR wenv vars}
+  <hr/>Kopiralyt 2023
 </body>
 </html>
 EOF
 
-nginx -g 'daemon off;'
+exec nginx -g 'daemon off;'

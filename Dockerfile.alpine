@@ -1,0 +1,9 @@
+FROM nginx:1.23.3-alpine
+RUN apk add \
+  curl \
+  bash
+COPY start.sh /
+RUN chmod +x /start.sh
+EXPOSE 80
+ENV WWW_DIR=/usr/share/nginx/html
+CMD [ "/start.sh" ]
