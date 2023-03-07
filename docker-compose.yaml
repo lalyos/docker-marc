@@ -21,9 +21,8 @@ services:
     ports:
     - 80
     environment:
-    - TITLE=Lalyos ebedelhet
-    - COLOR=hotpink
-    - BODY=<iframe src="https://giphy.com/embed/pVBwnPDeIpd3wToeQ2" width="480" height="333" frameBorder="0" class="giphy-embed" allowFullScreen></iframe><p><a href="https://giphy.com/gifs/garfield-cat-food-pVBwnPDeIpd3wToeQ2">via GIPHY</a></p>
+    - TITLE=${TITLE:-Coffebreak DEV}
+    - COLOR=${COLOR:-yellow}
     labels:
       - traefik.frontend.auth.basic=admin:$$1$$I5Kt8BwT$$G4y6mBV3xVzyZKUECxqV61
     image: web:alpine
