@@ -1,22 +1,6 @@
 version: '3.9'
 services:
 
-  traefik:
-    image: traefik:1.7-alpine
-    command:
-      - --retry
-      - --rest
-      - --docker.domain=lvh.me
-      - --docker.network=docker-marc_default
-      - --api.dashboard
-    labels:
-      - "traefik.frontend.rule=Host:traefik.lvh.me"
-      - "traefik.port=8080"
-    ports:
-      - 80:80
-    volumes:
-      - /var/run/docker.sock:/var/run/docker.sock
-
   web:
     ports:
     - 80
@@ -42,3 +26,7 @@ services:
       - 8080
 volumes:
   vipdb:
+
+networks:
+  default:
+    name: infra
